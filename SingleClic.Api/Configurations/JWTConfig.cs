@@ -28,11 +28,11 @@ namespace SingleClic.Api.Configurations
                 {
                     OnTokenValidated = context =>
                     {
-                        var userId = context.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                        if (userId != null)
+                        var claimsIdentity = (ClaimsIdentity)context.Principal.Identity;
+                        var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                        if (userIdClaim != null)
                         {
-                            var claimsIdentity = (ClaimsIdentity)context.Principal.Identity;
-                            claimsIdentity.AddClaim(new Claim("UserId", userId));
+                            claimsIdentity.AddClaim(new Claim("UserId", userIdClaim.Value));
                         }
                         return Task.CompletedTask;
                     }

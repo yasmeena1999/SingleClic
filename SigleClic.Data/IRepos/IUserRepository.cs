@@ -15,6 +15,6 @@ namespace SigleClic.Data.IRepos
         
         Task<AuthenticationResponse> RegisterAsync(User user, string password);
         Task<User> GetByEmailAsync(string email);
-
+        Task<User> GetByIdAsync(string id);
     }
 }

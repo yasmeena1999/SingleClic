@@ -14,18 +14,14 @@ namespace SingleClic.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _configuration;
-        private readonly IMapper _mapper;
+      
+       
         private readonly IAuthService _authService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, IMapper mapper, IAuthService authService)
+        public AccountController( IAuthService authService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
-            _mapper = mapper;
+          
+           
             _authService = authService;
         }
 

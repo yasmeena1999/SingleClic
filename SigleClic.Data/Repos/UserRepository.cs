@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SigleClic.Data.Context;
 using SigleClic.Data.IRepos;
 using SigleClic.Data.Responses;
@@ -54,7 +55,14 @@ namespace SigleClic.Data.Repos
 
                 return new AuthenticationResponse() { Success = createResult.Succeeded, Id = user.Id };
             }
-      
+        public async Task<User> GetByIdAsync(string id)
+        {
+            var user= await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (user == null)
+                return null;
+            return user;
+        }
+
     }
     }
 

@@ -11,9 +11,12 @@ namespace SingleClic.Api.Configurations
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-            
+            services.AddScoped<IBlogPostRepo, BlogPostRepository>();
+
             services.AddScoped<IAuthService, AuthService>();
-            services.AddAutoMapper(typeof(UserProfile));
+            services.AddScoped<IPostService, PostService>();
+
+            services.AddAutoMapper(typeof(UserProfile),typeof(PostProfiles));
 
             return services;
         }

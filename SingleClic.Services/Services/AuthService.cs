@@ -45,7 +45,7 @@ namespace SingleClic.Services.Services
         {
             var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim("UserGuid", user.Id.ToString(), ClaimValueTypes.String),
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email)
         };
@@ -58,7 +58,7 @@ namespace SingleClic.Services.Services
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
+            
             return tokenHandler.WriteToken(token);
         }
         public async Task<BaseResponse<string>> login(string Email, string password)
@@ -73,7 +73,8 @@ namespace SingleClic.Services.Services
             var user = await _userRepository.GetByEmailAsync(Email);
 
             var token = await CreateTokenAsync(user);
-            return new BaseResponse<string> { Message = $"{user.UserName} Authenticated Successfully", Result = token };
+            
+            return new BaseResponse<string> { Message = $"{user.Id} Authenticated Successfully", Result = token };
 
         }
         public async Task<AuthenticationResponse> Register(RegisterRequestDto request)

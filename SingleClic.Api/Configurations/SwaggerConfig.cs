@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace SingleClic.Api.Configurations
 {
@@ -6,17 +7,20 @@ namespace SingleClic.Api.Configurations
     {
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            services.AddSwaggerGen(option =>
+            services.AddSwaggerGen(c =>
             {
-                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
+                    Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -25,9 +29,9 @@ namespace SingleClic.Api.Configurations
                             {
                                 Type = ReferenceType.SecurityScheme,
                                 Id = "Bearer"
-                            },
+                            }
                         },
-                        new string[]{ }
+                        new string[] { }
                     }
                 });
             });
