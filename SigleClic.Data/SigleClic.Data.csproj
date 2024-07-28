@@ -16,13 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SingleClic.Api\SingleClic.Api.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="IRepos\" />
-    <Folder Include="Repos\" />
+    <ProjectReference Include="..\SingleClic.Core\SingleClic.Core.csproj" />
   </ItemGroup>
 
 </Project>
