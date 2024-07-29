@@ -1,5 +1,6 @@
 
 using SingleClic.Api.Configurations;
+using System.Text.Json.Serialization;
 
 namespace SingleClic.Api
 {

@@ -13,7 +13,10 @@ namespace SingleClic.Core.MappingProfiles
     {
         public PostProfiles()
         {
-            CreateMap<BlogPostDto,BlogPost>().ReverseMap();
+            CreateMap<BlogPostDto,PostRetrievedDto>().ReverseMap();
+            CreateMap<BlogPostDto, BlogPost>();
+            CreateMap<BlogPost,PostRetrievedDto>().ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author.UserName));
+
         }
     }
 }

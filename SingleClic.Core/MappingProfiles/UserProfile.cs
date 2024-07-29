@@ -14,7 +14,9 @@ namespace SingleClic.Core.MappingProfiles
     {
         public UserProfile() {
             CreateMap<RegisterRequestDto, User>();
-               
+            CreateMap<User, userfollowlistDto>()
+         .ForMember(dest => dest.Followers, opt => opt.Ignore())
+         .ForMember(dest => dest.Followings, opt => opt.Ignore());
         }
     }
 }

@@ -40,6 +40,16 @@ namespace SigleClic.Data.Context
                 .WithMany(u => u.Followers)
                 .HasForeignKey(uf => uf.FolloweeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BlogPost>()
+            .HasOne(p => p.Author)
+            .WithMany(b => b.BlogPosts)
+            .HasForeignKey(p => p.AuthorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BlogPost>().Property(p => p.Content).IsRequired();
+            modelBuilder.Entity<BlogPost>().Property(p => p.Title).IsRequired();
+            modelBuilder.Entity<Comment>().Property(c=>c.Text).IsRequired();
         }
     }
 }

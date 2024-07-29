@@ -45,7 +45,7 @@ namespace SingleClic.Services.Services
         {
             var claims = new List<Claim>
         {
-            new Claim("UserGuid", user.Id.ToString(), ClaimValueTypes.String),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email)
         };
@@ -58,7 +58,7 @@ namespace SingleClic.Services.Services
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            
+
             return tokenHandler.WriteToken(token);
         }
         public async Task<BaseResponse<string>> login(string Email, string password)
@@ -84,6 +84,7 @@ namespace SingleClic.Services.Services
 
             return response;
         }
+       
 
     }
 }

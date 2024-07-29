@@ -22,6 +22,8 @@ namespace SigleClic.Data.Repos
         {
             return await _context.BlogPosts
                 .Include(bp => bp.Author)
+                .Include(bp=>bp.Comments)
+                .ThenInclude(c=>c.User)
                 .FirstOrDefaultAsync(bp => bp.Id == id);
         }
 
@@ -29,6 +31,8 @@ namespace SigleClic.Data.Repos
         {
             return await _context.BlogPosts
                 .Include(bp => bp.Author)
+                .Include(bp=>bp.Comments)
+                .ThenInclude(c=>c.User)
                 .ToListAsync();
         }
 

@@ -12,10 +12,11 @@ namespace SingleClic.Services.IServices
 {
     public interface IPostService
     {
-        Task<BaseResponse<BlogPost>> CreatePostAsync(BlogPostDto post, ClaimsPrincipal userPrincipal);
-        Task<BaseResponse<BlogPost>> GetPostByIdAsync(int postId);
-        Task<BaseResponse<IEnumerable<BlogPost>>> GetPostsAsync(string title, string authorId);
-        Task<BaseResponse<BlogPost>> UpdatePostAsync(int postId, BlogPost updatedPost, string currentUserId);
+        Task<BaseResponse<PostRetrievedDto>> CreatePostAsync(BlogPostDto post,string userid);
+        Task<BaseResponse<PostRetrievedDto>> GetPostByIdAsync(int postId);
+        Task<BaseResponse<IEnumerable<PostRetrievedDto>>> GetPostsAsync(string title, string authorId);
+        Task<BaseResponse<PostRetrievedDto>> UpdatePostAsync(int postId, BlogPostDto updatedPostDto, string currentUserId);
         Task<BaseResponse<bool>> DeletePostAsync(int postId, string currentUserId);
+        Task<BaseResponse<IEnumerable<PostRetrievedDto>>> GetAllPostsAsync();
     }
 }
